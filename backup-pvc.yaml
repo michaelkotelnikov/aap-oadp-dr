@@ -1,0 +1,16 @@
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: backup-aap-pvc
+  namespace: openshift-adp
+  labels:
+    velero.io/storage-location: default
+spec:
+  defaultVolumesToFsBackup: true
+  includedNamespaces: 
+    - aap
+  itemOperationTimeout: 1h0m0s
+  storageLocation: default
+  ttl: 24h0m0s
+  volumeSnapshotLocations:
+    - oadp-vsl

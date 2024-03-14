@@ -1,0 +1,16 @@
+apiVersion: velero.io/v1
+kind: VolumeSnapshotLocation
+metadata:
+  name: oadp-vsl
+  namespace: openshift-adp
+spec:
+  provider: aws
+  config:
+    region: minio
+    s3ForcePathStyle: "true"
+    s3Url: https://minio-oadp-minio.apps.cluster-hvltt.dynamic.redhatworkshops.io
+    bucket: oadp
+    insecureSkipTLSVerify: "true"
+  credential:
+    name: cloud-credentials
+    key: cloud

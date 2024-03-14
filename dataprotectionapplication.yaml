@@ -1,0 +1,33 @@
+apiVersion: oadp.openshift.io/v1alpha1
+kind: DataProtectionApplication
+metadata:
+  name: dpa
+  namespace: openshift-adp
+spec:
+  configuration:
+    nodeAgent:
+        enable: true
+        uploaderType: restic
+    velero:
+      featureFlags:
+        - EnableCSI
+      defaultPlugins:
+      - openshift
+      - aws
+      - csi
+  backupLocations:
+    - name: default
+      velero:
+        provider: aws
+        default: true
+        objectStorage:
+          bucket: oadp
+          prefix: oadp
+        config:
+          region: minio
+          s3Url: https://minio-oadp-minio.apps.cluster-hvltt.dynamic.redhatworkshops.io
+          s3ForcePathStyle: "true"
+          insecureSkipTLSVerify: "true"
+        credential:
+          name: cloud-credentials
+          key: cloud

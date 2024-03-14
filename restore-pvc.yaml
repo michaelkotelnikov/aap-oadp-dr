@@ -1,0 +1,20 @@
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: restore-aap-pvc-6
+  namespace: openshift-adp
+spec:
+  backupName: backup-aap-pvc-2
+  excludedResources:
+  - operatorgroups.operators.coreos.com
+  - subscriptions.operators.coreos.com
+  - deployments
+  - statefulsets
+  - replicasets
+  - automationcontrollerbackups.automationcontroller.ansible.com
+  - automationcontrollerrestores.automationcontroller.ansible.com
+  existingResourcePolicy: update
+  includedNamespaces:
+    - aap
+  itemOperationTimeout: 1h0m0s
+  restorePVs: true
