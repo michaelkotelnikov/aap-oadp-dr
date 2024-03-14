@@ -2,6 +2,8 @@
 
 This repository demonstrates a backup and restore flow for Ansible Automation Platform (AAP) between two OpenShift clusters by using OpenShift Application Data Protection (OADP).
 
+Inspired by - https://github.com/IdanHenik/RH-Disaster-Recovery-Workshop
+
 ## Setting up S3 with Minio
 
 On your primary cluster -
