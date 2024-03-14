@@ -92,13 +92,21 @@ $ oc get backup -n openshift-adp -o yaml
 
 On secondary site -
 
-1. Create a CronJob resource that periodically runs a flow that restores and configures AAP from the backup created in the primary site -
+1. Create a service account in the openshift-adp namespace and assign it admin privilleges to run administrative tasks against the aap namespace -
+
+```
+$ oc create sa restore-sa -n openshift-adp
+
+$ oc adm policy add-role-to-user cluster-admin -z restore-sa -n openshift-adp
+```
+
+2. Create a CronJob resource that periodically runs a flow that restores and configures AAP from the backup created in the primary site -
 
 ```
 $ oc apply -f oadp-manifests/cronjob.yaml -n openshift-adp
 ```
 
-2. Validate that the job is completes successfuly and AAP is available with the relevant restored data.
+3. Validate that the job is completes successfuly and AAP is available with the relevant restored data.
 
 ```
 $ oc get job -n openshift-adp -o yaml
