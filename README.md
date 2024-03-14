@@ -77,7 +77,7 @@ On primary cluster -
 2. Create a backup by applying the backup CR -
 
 ```
-$ oc apply -f backup-pvc.yaml
+$ oc apply -f oadp-manifests/backup-pvc.yaml
 ```
 
 3. Validate that the backup is successful by verifying the output of the next commands -
@@ -93,7 +93,7 @@ On secondary site -
 1. Create a CronJob resource that periodically runs a flow that restores and configures AAP from the backup created in the primary site -
 
 ```
-$ oc apply -f cronjob.yaml -n openshift-adp
+$ oc apply -f oadp-manifests/cronjob.yaml -n openshift-adp
 ```
 
 2. Validate that the job is completes successfuly and AAP is available with the relevant restored data.
