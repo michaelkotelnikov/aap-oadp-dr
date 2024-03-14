@@ -57,7 +57,7 @@ spec:
 
                 sleep 5
 
-                oc delete pods --all -n aap
+                kubectl delete pods --all -n aap
 
                 sleep 100
               resources: {}
