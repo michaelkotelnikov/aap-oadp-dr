@@ -56,8 +56,48 @@ $ oc apply -f oadp-manifests/volumesnapshotlocation.yaml
 
 ## Configuring AAP
 
+On both clusters -
+
+1. Install the AAP operator from Operator Hub in the aap namespace.
+
+2. Allow the AAP database to run as a specific UID by attaching the anyuid SCC to the default service account in the namespace -
+
+```
+$ oc adm policy add-scc-to-user anyuid -z default -n aap
+```
+
+3. Install the AutomationController CR.
+
+## Backup
+
 On primary cluster -
 
-1. Install the AAP operator from Operator Hub.
+1. Log into the AAP instance and make some changes. Create inventories, credentials, etc.
 
-2. 
+2. Create a backup by applying the backup CR -
+
+```
+$ oc apply -f backup-pvc.yaml
+```
+
+3. Validate that the backup is successful by verifying the output of the next commands -
+
+```
+$ oc get backup -n openshift-adp -o yaml
+```
+
+## Restore
+
+On secondary site -
+
+1. Create a CronJob resource that periodically runs a flow that restores and configures AAP from the backup created in the primary site -
+
+```
+$ oc apply -f cronjob.yaml -n openshift-adp
+```
+
+2. Validate that the job is completes successfuly and AAP is available with the relevant restored data.
+
+```
+$ oc get job -n openshift-adp -o yaml
+```
