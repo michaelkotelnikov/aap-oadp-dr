@@ -4,7 +4,7 @@ metadata:
   name: aap-restore
   namespace: openshift-adp
 spec:
-  schedule: '*/60 * * * *'
+  schedule: '30 * * * *'
   concurrencyPolicy: Allow
   suspend: false
   jobTemplate:

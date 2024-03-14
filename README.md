@@ -97,7 +97,7 @@ On secondary site -
 ```
 $ oc create sa restore-sa -n openshift-adp
 
-$ oc adm policy add-role-to-user cluster-admin -z restore-sa -n openshift-adp
+$ oc adm policy add-cluster-role-to-user cluster-admin -z restore-sa -n openshift-adp
 ```
 
 2. Create a CronJob resource that periodically runs a flow that restores and configures AAP from the backup created in the primary site -
