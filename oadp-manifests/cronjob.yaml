@@ -58,6 +58,8 @@ spec:
                 sleep 5
 
                 oc delete pods --all -n aap
+
+                sleep 100
               resources: {}
               terminationMessagePath: /dev/termination-log
               terminationMessagePolicy: File
